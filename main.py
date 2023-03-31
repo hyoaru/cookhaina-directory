@@ -3,7 +3,9 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request
 
 # App imports
-from utilities.api_requests import get_request_from_search_by_main_ingredient, get_request_categories_information
+from utilities.api_requests import (
+    get_request_from_search_by_main_ingredient, get_request_categories_information,
+    get_request_from_search_by_category)
 
 # Load environment variables
 load_dotenv()
@@ -30,8 +32,10 @@ def search():
     meals = get_request_from_search_by_main_ingredient(keyword)['meals']
     return render_template('main/search.html', meals = meals)
 
-# @app.route('/category/<int:category_id>')
-# def category():
+@app.route('/category/<category_name>')
+def category(category_name):
+    meals = get_request_from_search_by_category(category_name)['meals']
+    return render_template('main/category.html', meals = meals)
 
 
 if __name__ == '__main__':
