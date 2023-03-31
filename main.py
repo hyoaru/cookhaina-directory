@@ -23,5 +23,16 @@ def home():
     meals = get_request_from_search_by_main_ingredient('beef')['meals']
     return render_template('main/home.html', meals = meals)
 
+@app.route('/search')
+def search():
+    query_request = request.args.get(key = 'keyword', type = str)
+    keyword = '' if query_request is None else query_request
+    meals = get_request_from_search_by_main_ingredient(keyword)['meals']
+    return render_template('main/search.html', meals = meals)
+
+# @app.route('/category/<int:category_id>')
+# def category():
+
+
 if __name__ == '__main__':
     app.run(debug=True)

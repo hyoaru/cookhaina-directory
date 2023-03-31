@@ -14,12 +14,12 @@
                 </li>
             </ul>
 
-            <form class="d-flex" role="search" action="#">
+            <form class="d-flex" role="search" action="{{ url_for('search') }}">
                 <div class="input-group">
                     <span class="input-group-text bg-beige">
                         <i class="bi bi-search"></i>
                     </span>
-                    <input type="text" class="form-control bg-beige" placeholder="Search main ingredient">
+                    <input type="text" class="form-control bg-beige" placeholder="Search main ingredient" name="keyword">
                     <button class="btn btn-outline-dark btn-sm text-dark" type="submit">Search</button>
                 </div>
             </form>
