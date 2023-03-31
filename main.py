@@ -4,7 +4,6 @@ from flask import Flask, render_template, request
 
 # App imports
 from utilities.api_requests import get_request_from_search_by_main_ingredient, get_request_categories_information
-from utilities.essentials import convert_to_2d_list_partition_by_n
 
 # Load environment variables
 load_dotenv()
@@ -16,8 +15,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 def inject_global_elements():
     categories_information = get_request_categories_information()['categories']
     return dict(
-        categories_information = categories_information, 
-        convert_to_2d_list_partition_by_n = convert_to_2d_list_partition_by_n)
+        categories_information = categories_information)
 
 @app.route('/')
 @app.route('/home')
