@@ -1,0 +1,10 @@
+# Directories
+**/__pycache__/
+/test/
+/migrations/
+/instance/
+.venv/
+data/
+
+# Files
+.env
