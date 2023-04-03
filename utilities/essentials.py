@@ -5,6 +5,8 @@ def saveto_binary(obj_structure, file_name: str, data_root_path_folder_name: str
     """Saves an object structure to binary format."""
 
     data_root_path = f'data/{data_root_path_folder_name}'
+    if not os.path.exists('data'):
+        os.mkdir('data')
     if not os.path.exists(f'{data_root_path}'):
         os.mkdir(f'{data_root_path}')
     with open(f'{data_root_path}/{file_name}.bin', 'wb') as file:
