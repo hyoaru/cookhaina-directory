@@ -37,6 +37,9 @@ def category(category_name):
     meals = get_request_from_search_by_category(category_name)['meals']
     return render_template('main/category.html', meals = meals)
 
+@app.route('/about')
+def about():
+    return render_template('main/about.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
