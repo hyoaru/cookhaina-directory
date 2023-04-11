@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
-{% block content %} 
-    <h2>About us</h2>
-    <p>jj baho</p>
+{% block content %}
+    <div class="container">
+        <div class="text-center">
+            <h2>About us</h2>
+            <p class="text-break fs-5">
+                Welcome to Cookhaina Directory, your ultimate destination for finding delicious and healthy food recipes. Our web app is designed to help you explore a wide range of cuisines, cooking styles, and dietary preferences.
+
+                We understand that finding the perfect recipe can be a daunting task, especially with so many options available online. That's why we created Cookhaina Directory – a centralized platform where you can discover recipes from a diverse collection of sources.
+
+                Cookhaina Directory is also equipped with advanced search filters that allow you to refine your search results based on ingredients. You can even save your favorite recipes to your personal cookbook and share them with friends and family.
+
+                Thank you for choosing Cookhaina Directory, and we hope you enjoy exploring our collection of mouth-watering recipes!
+            </p>
+        </div>
+
+        <img src="{{ url_for('static', filename = 'images/undraw_cooking_p7m1.svg') }}" alt="" class="img-fluid mx-auto d-block">
+        
+    </div> 
 {% endblock content %}
