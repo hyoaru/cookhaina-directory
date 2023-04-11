@@ -1,0 +1,10 @@
+{% extends "errors/base_errors.html" %}
+{% block content %}
+    <div class = "text-center">
+        <h1 class="fw-bold display-1">403</h1>
+        <p class="fs-5 lead">You don't have the permission to do that.</p>
+        <div class="d-flex justify-content-center ms-0 ms-sm-5">
+            <img src="{{ url_for('static', filename = 'images/errors/undraw_cancel_re_pkdm.svg') }}" alt="" width="400" class="img-fluid">
+        </div>
+    </div>
+{% endblock content %}
