@@ -4,7 +4,7 @@
             {% for category in categories_information[0:1] %}
                 <a href="{{ url_for('category', category_name = category['strCategory']) }}">
                     <div class="carousel-item active" data-bs-interval="3000">
-                        <div class="card bg-beige">
+                        <div class="card ">
                             <img src="{{ category['strCategoryThumb'] }}" class="card-img d-block w-100" style="height: 15rem; object-fit: cover;">
                             <div class="card-img-overlay bg-secondary opacity-25"></div>
                             <div class="card-img-overlay d-flex align-items-center text-white">
@@ -19,7 +19,7 @@
             {% for category in categories_information[1::] %}
                 <a href="{{ url_for('category', category_name = category['strCategory']) }}">
                     <div class="carousel-item" data-bs-interval="3000">
-                        <div class="card bg-beige">
+                        <div class="card ">
                             <img src="{{ category['strCategoryThumb'] }}" class="card-img d-block w-100" style="height: 15rem; object-fit: cover;">
                             <div class="card-img-overlay bg-secondary opacity-25"></div>
                             <div class="card-img-overlay d-flex align-items-center text-white">
