@@ -1,12 +1,25 @@
 <div class="row">
-    {% for meal in meals %}
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="card mb-4 bg-beige" >
-                <img src="{{ meal['strMealThumb'] }}" alt="" class="card-img-top meal-thumbnail" >
-                <div class="card-body">
-                    <h5 class="card-title">{{ meal['strMeal'] }}</h5>
+    {% if meals == None %}
+        <div class="text-center mb-5 mt-4">
+            <div class="d-flex justify-content-center ms-0 ms-sm-5">
+                <img src="{{ url_for('static', filename = 'images/undraw_void_-3-ggu.svg') }}" alt="" width="300" class="img-fluid">
+            </div>
+            <p class="lead fw-bold text-muted mt-4 fs-3">No results found.</p>
+        </div>
+
+    {% else %}
+        {% include '/layout/defined/categories.html' %}
+        <div style="height: 3em;"></div>
+        {% for meal in meals %}
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="card mb-4 " >
+                    <img src="{{ meal['strMealThumb'] }}" alt="" class="card-img-top meal-thumbnail" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ meal['strMeal'] }}</h5>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
 </div>
+
