@@ -16,9 +16,12 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 Environment(app).register({
     'styles': Bundle(
-        'assets/css/style.scss', filters = 'libsass', 
+        'assets/scss/style.scss', filters = ('libsass', 'cssmin'), 
         depends = 'packages/bootstrap-5.3.0-alpha3/scss/*.scss',
-        output = 'assets/css/main.css', ), })
+        output = 'assets/css/main.css', ), 
+    'scripts': Bundle(
+        'packages/bootstrap-5.3.0-alpha3/dist/js/bootstrap.bundle.js',
+        filters = ('jsmin'), output = 'assets/js/main.js', ), })
 
 @app.context_processor
 def inject_global_elements():
