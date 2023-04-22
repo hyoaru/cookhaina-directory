@@ -8,3 +8,4 @@ data/
 
 # Files
 .env
+static/assets/css/main.css
