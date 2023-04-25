@@ -1,0 +1,8 @@
+.meal-thumbnail {
+    filter: drop-shadow(0 0 #6c757d);
+}   
+
+// Bootstrap imports
+@import "./abstract/variables";
+@import "../../packages/bootstrap-5.3.0-alpha3/scss/bootstrap.scss";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css");

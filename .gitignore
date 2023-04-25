@@ -5,6 +5,8 @@
 /instance/
 .venv/
 data/
+.webassets-cache/
 
 # Files
 .env
+static/assets/css/main.css

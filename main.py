@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
+from flask_assets import Environment, Bundle
 
 # App imports
 from utilities.api_requests import (
@@ -12,6 +13,15 @@ load_dotenv()
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
+Environment(app).register({
+    'styles': Bundle(
+        'assets/scss/style.scss', filters = ('libsass', 'cssmin'), 
+        depends = 'packages/bootstrap-5.3.0-alpha3/scss/*.scss',
+        output = 'assets/css/main.css', ), 
+    'scripts': Bundle(
+        'packages/bootstrap-5.3.0-alpha3/dist/js/bootstrap.bundle.js',
+        filters = ('jsmin'), output = 'assets/js/main.js', ), })
 
 @app.context_processor
 def inject_global_elements():
