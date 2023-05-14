@@ -10,3 +10,4 @@ data/
 # Files
 .env
 static/assets/css/main.css
+static/assets/js/main.js
