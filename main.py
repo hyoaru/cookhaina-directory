@@ -21,6 +21,7 @@ Environment(app).register({
         output = 'assets/css/main.css', ), 
     'scripts': Bundle(
         'packages/bootstrap-5.3.0-alpha3/dist/js/bootstrap.bundle.js',
+        'assets/js/script.js',
         filters = ('jsmin'), output = 'assets/js/main.js', ), })
 
 @app.context_processor
