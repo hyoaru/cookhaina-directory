@@ -6,7 +6,8 @@ from flask_assets import Environment, Bundle
 # App imports
 from utilities.api_requests import (
     get_request_from_search_by_main_ingredient, get_request_categories_information,
-    get_request_from_search_by_category, get_request_random_meal_of_the_day)
+    get_request_from_search_by_category, get_request_random_meal_of_the_day, 
+    get_request_from_search_by_name)
 
 # Load environment variables
 load_dotenv()
@@ -41,8 +42,14 @@ def home():
 def search():
     query_request = request.args.get(key = 'keyword', type = str)
     keyword = '' if query_request is None else query_request
-    meals = get_request_from_search_by_main_ingredient(keyword)['meals']
-    return render_template('main/search.html', meals = meals)
+    
+    by_main_ingredient = get_request_from_search_by_main_ingredient(keyword)['meals']
+    by_main_ingredient = [] if by_main_ingredient is None else by_main_ingredient
+    by_meal_name = get_request_from_search_by_name(keyword)['meals']
+    by_meal_name = [] if by_meal_name is None else by_meal_name
+
+    meals = by_meal_name + by_main_ingredient
+    return render_template('main/search.html', meals = meals, keyword = keyword)
 
 @app.route('/category/<category_name>')
 def category(category_name):

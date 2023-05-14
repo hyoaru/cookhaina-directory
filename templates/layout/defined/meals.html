@@ -1,10 +1,10 @@
 <div class="row">
-    {% if meals == None %}
+    {% if not meals %}
         <div class="text-center mb-5 mt-4">
+            <p class="lead fw-bold text-muted mt-4 fs-3">No results found.</p>
             <div class="d-flex justify-content-center ms-0 ms-sm-5">
                 <img src="{{ url_for('static', filename = 'assets/images/undraw_void_-3-ggu.svg') }}" alt="" width="300" class="img-fluid">
             </div>
-            <p class="lead fw-bold text-muted mt-4 fs-3">No results found.</p>
         </div>
 
     {% else %}

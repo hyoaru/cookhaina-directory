@@ -7,7 +7,7 @@ from utilities.essentials import load_binary, saveto_binary
 def get_request_from_search(keyword: str, api: str, folder_name: str) -> dict:
     keyword = keyword.replace(' ', '_')
     api = f'{api}{keyword}'
-    folder_name = 'by_main_ingredient'
+    folder_name = folder_name
 
     request = load_binary(file_name = keyword, data_root_path_folder_name = folder_name)
     request_not_exist_locally = request == {}
@@ -67,5 +67,12 @@ def get_request_random_meal_of_the_day() -> dict:
         request = requests.get(api).json()
         request.update({'dateToReload': datetime.utcnow().date() + timedelta(days = 1)})
         saveto_binary(obj_structure = request, file_name = file_name, data_root_path_folder_name = folder_name)
+
+    return request
+
+def get_request_from_search_by_name(keyword: str) -> dict:
+    request = get_request_from_search(
+        keyword = keyword, folder_name = 'meal_name', 
+        api = 'https://www.themealdb.com/api/json/v1/1/search.php?s=')
 
     return request
