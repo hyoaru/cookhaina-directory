@@ -54,7 +54,7 @@ def search():
 @app.route('/category/<category_name>')
 def category(category_name):
     meals = get_request_from_search_by_category(category_name)['meals']
-    return render_template('main/category.html', meals = meals)
+    return render_template('main/category.html', meals = meals, category_name = category_name)
 
 @app.route('/about')
 def about():

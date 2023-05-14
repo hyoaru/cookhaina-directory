@@ -1,4 +1,6 @@
 {% extends 'base_main.html' %}
 {% block content %}
+    <h4 class="fw-bold mt-3">Filtered by category: <span class="text-primary">{{ category_name }}</span></h4>
+    <div style="height: 1.3rem;"></div>
     {% include 'layout/defined/meals.html' %}
 {% endblock content %}
