@@ -2,8 +2,16 @@
 @import "../../../packages/bootstrap-5.3.0-alpha3/scss/variables.scss";
 
 $theme-colors: map-merge($theme-colors, (
-    "b1": #d4e1e7,
-    "b2": #0d1715,
-    "a1": #073e72,
-    "a2": #07a968,
+    "white":      #ffffff,
+    "light":      #ffffff,
+    "dark":       #433d2d,
+    "primary":    #005386,
+    "secondary":  #687c8e,
+    "info":       #f9ccb6,
+    "accent1":    #e1122a,
+    "accent2":    #b86172,
+    "accent3":    #e2d9fb,
+    "success":    #00ba67,
+    "warning":    #ebd000,
+    "danger":     #ff0500,
 ));

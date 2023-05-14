@@ -1,4 +1,4 @@
-<header class="fixed-top container bg-white">
+<header class="fixed-top container bg-light">
     <nav class="navbar navbar-expand-lg my-4">
         <a class="navbar-brand fw-bold" href="{{ url_for('home') }}">Cookhaina Directory</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
@@ -16,10 +16,10 @@
 
             <form class="d-flex" role="search" action="{{ url_for('search') }}">
                 <div class="input-group">
-                    <span class="input-group-text ">
+                    <span class="input-group-text bg-light">
                         <i class="bi bi-search"></i>
                     </span>
-                    <input type="text" class="form-control " placeholder="Search main ingredient" name="keyword">
+                    <input type="text" class="form-control bg-light" placeholder="Search main ingredient" name="keyword">
                     <button class="btn btn-outline-dark btn-sm" type="submit">Search</button>
                 </div>
             </form>
