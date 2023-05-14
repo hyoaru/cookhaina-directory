@@ -1,21 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row">
-        <div class="col-12 col-md-7">
-            <h2>About us</h2>
-            <p class="text-break text-muted">
-                Welcome to Cookhaina Directory, your ultimate destination for finding delicious and healthy food recipes. Our web app is designed to help you explore a wide range of cuisines, cooking styles, and dietary preferences.
-
-                We understand that finding the perfect recipe can be a daunting task, especially with so many options available online. That's why we created Cookhaina Directory – a centralized platform where you can discover recipes from a diverse collection of sources.
-
+    <div class="row gx-5">
+        <div class="col-12 col-xl-7">
+            <small class="text-uppercase fw-bold text-primary d-block mb-3">About us</small>
+            <h1 class="fw-bold mb-4">Your ultimate destination for finding delicious and healthy food recipes. </h1>
+            <div class="d-flex">
+                <div class="vr me-4 d-none d-sm-block"></div>
+                <div class="text-break lead pt-1">
+                    <p>
+                        Welcome to Cookhaina Directory. Our web app is designed to help you explore a wide range of cuisines, cooking styles, and dietary preferences.
+        
+                        We understand that finding the perfect recipe can be a daunting task, especially with so many options available online. 
+                    </p>
+                    <p class="text-primary fw-medium">
+                        That's why we created Cookhaina Directory – a centralized platform where you can discover recipes from a diverse collection of sources.
+                    </p>
+                </div>
+            </div>
+            <p class="text-primary d-none">
                 Cookhaina Directory is also equipped with advanced search filters that allow you to refine your search results based on ingredients. You can even save your favorite recipes to your personal cookbook and share them with friends and family.
-
-                Thank you for choosing Cookhaina Directory, and we hope you enjoy exploring our collection of mouth-watering recipes!
             </p>
         </div>
 
-        <div class="col-12 col-md-5 mt-5 mt-sm-0 mb-5">
-            <img src="{{ url_for('static', filename = 'assets/images/undraw_cooking_p7m1.svg') }}" alt="" width="350" class="img-fluid mx-auto d-block">
+        <div class="col-12 col-xl-5 d-none d-xl-block">
+            <div class="d-flex h-100">
+                <img src="{{ url_for('static', filename = 'assets/images/undraw_cooking_p7m1.svg') }}" alt="" class="bg-light img-fluid rounded-circle p-1 my-auto d-block">
+            </div>
         </div>
     </div>
 {% endblock content %}
