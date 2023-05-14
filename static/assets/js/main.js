@@ -748,3 +748,6 @@ _clearTimeout(){clearTimeout(this._timeout);this._timeout=null;}
 static jQueryInterface(config){return this.each(function(){const data=Toast.getOrCreateInstance(this,config);if(typeof config==='string'){if(typeof data[config]==='undefined'){throw new TypeError(`No method named"${config}"`);}
 data[config](this);}});}}
 enableDismissTrigger(Toast);defineJQueryPlugin(Toast);const index_umd={Alert,Button,Carousel,Collapse,Dropdown,Modal,Offcanvas,Popover,ScrollSpy,Tab,Toast,Tooltip};return index_umd;}));document.querySelectorAll('.meal-card').forEach((mealCard)=>{const mealCardImageContainer=mealCard.firstElementChild;const mealCardImage=mealCardImageContainer.lastElementChild;const mealCardTitle=mealCard.lastElementChild.firstElementChild;mealCardImage.addEventListener('load',()=>{mealCardImageContainer.children[0].remove();mealCardImageContainer.children[0].remove();mealCardImage.classList.remove('d-none');mealCardTitle.classList.remove('placeholder');})})
+const categoryButton=document.querySelector('#categoryButton');categoryButton.addEventListener('click',()=>{console.log(categoryButton.attributes)
+if(categoryButton.classList.contains('rounded-bottom-0')){categoryButton.style.transition="all 3s"}else{categoryButton.style.transition="all 0s"}
+categoryButton.classList.toggle('rounded-bottom-0')})

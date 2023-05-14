@@ -1,0 +1,32 @@
+<!-- Categories -->
+<div>
+    <a class="btn btn-dark rounded-4 w-100 px-4 py-3" data-bs-toggle="collapse" href="#categoryOptions" id="categoryButton" role="button">
+        <div class="d-flex justify-content-between">
+            <span class="text-uppercase font-monospace fw-bold text-white">Categories</span>
+            <i class="dropdown-toggle"></i>
+        </div>
+    </a>
+    <div class="collapse bg-dark rounded-4 rounded-top-0" id="categoryOptions">
+        <div class="d-flex flex-wrap px-3 pb-3">
+            {% for category in categories_information %}
+                <a href="{{ url_for('category', category_name = category['strCategory']) }}">
+                    <span class="badge rounded-pill text-bg-white me-1 mb-1 py-1 px-2">{{ category['strCategory']  }}</span>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Meal of the day -->
+<div class="bg-dark rounded-4 text-white w-100 py-4 mt-3">
+    <h6 class="fw-bold text-uppercase font-monospace px-4">Meal of the day</h6>
+    <div class="px-3">
+        <img src="{{ meal_of_the_day['strMealThumb'] }}" alt="" class="img-fluid rounded-4 mt-2 mb-3">
+        <div class="px-3">
+            <p class="fw-medium text-break mb-0">{{ meal_of_the_day['strMeal'] }}</p>
+            <small class="">Category: {{ meal_of_the_day['strCategory'] }}</small>
+        </div>
+        <a href="{{ meal_of_the_day['strYoutube'] }}" class="btn btn-sm btn-light mt-3 d-block">Help me prepare!</a>
+    </div>
+
+</div>

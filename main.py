@@ -6,7 +6,7 @@ from flask_assets import Environment, Bundle
 # App imports
 from utilities.api_requests import (
     get_request_from_search_by_main_ingredient, get_request_categories_information,
-    get_request_from_search_by_category)
+    get_request_from_search_by_category, get_request_random_meal_of_the_day)
 
 # Load environment variables
 load_dotenv()
@@ -27,8 +27,9 @@ Environment(app).register({
 @app.context_processor
 def inject_global_elements():
     categories_information = get_request_categories_information()['categories']
+    meal_of_the_day = get_request_random_meal_of_the_day()['meals'][0]
     return dict(
-        categories_information = categories_information)
+        categories_information = categories_information, meal_of_the_day = meal_of_the_day)
 
 @app.route('/')
 @app.route('/home')
