@@ -50,7 +50,14 @@ def search():
     by_meal_name = get_request_from_search_by_name(keyword)['meals']
     by_meal_name = [] if by_meal_name is None else by_meal_name
 
-    meals = by_meal_name + by_main_ingredient
+    by_meal_name_ids = [meal.get('idMeal') for meal in by_meal_name]
+    meals = by_meal_name
+    
+    for meal in by_main_ingredient:
+        meal_not_present_in_main_list = meal.get('idMeal') not in by_meal_name_ids
+        if meal_not_present_in_main_list:
+            meals.append(meal)
+
     return render_template('main/search.html', meals = meals, keyword = keyword)
 
 @app.route('/category/<category_name>')
