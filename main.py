@@ -25,7 +25,6 @@ Environment(app).register({
         filters = ('jsmin'), output = 'assets/js/style_scripts.js', ), 
     'user_scripts': Bundle(
         'assets/js/user_defined.js',
-        output = 'assets/js/user_scripts.js' 
     ), })
 
 @app.context_processor

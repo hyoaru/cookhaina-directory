@@ -4,8 +4,6 @@ function removePlaceholder(mealCardID) {
     const mealCardImage = mealCardImageContainer.lastElementChild;
     const mealCardTitle = card.lastElementChild.firstElementChild;
 
-    console.log('here')
-
     mealCardImageContainer.children[0].remove();
     mealCardImageContainer.children[0].remove();
     mealCardImage.classList.remove('d-none');

@@ -1,4 +1,5 @@
 <!-- Categories -->
+
 <div>
     <a class="btn btn-dark rounded-4 w-100 px-4 py-3" data-bs-toggle="collapse" href="#categoryOptions" id="categoryButton" role="button">
         <div class="d-flex justify-content-between">
@@ -29,5 +30,8 @@
         <a href="" class="btn btn-sm btn-primary mt-3 d-block">See procedures</a>
         <a href="{{ meal_of_the_day['strYoutube'] }}" class="btn btn-sm btn-light mt-1 d-block">Help me prepare!</a>
     </div>
+
+
+    {% assets "user_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
 
 </div>
