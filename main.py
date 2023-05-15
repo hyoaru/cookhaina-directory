@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from flask_assets import Environment, Bundle
 
 # App imports
@@ -35,7 +35,6 @@ def inject_global_elements():
         categories_information = categories_information, meal_of_the_day = meal_of_the_day)
 
 @app.route('/')
-@app.route('/home')
 def home():
     meals = get_request_from_search_by_main_ingredient('beef')['meals']
     return render_template('main/home.html', meals = meals)
