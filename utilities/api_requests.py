@@ -55,18 +55,24 @@ def get_request_random_meal_of_the_day() -> dict:
     request_not_exist_locally = request == {}
 
     if request_not_exist_locally:
-        request = requests.get(api).json()
-        request.update({'dateToReload': datetime.utcnow().date() + timedelta(days = 1)})
-        saveto_binary(obj_structure = request, file_name = file_name, data_root_path_folder_name = folder_name)
+        try:
+            request = requests.get(api).json()
+            request.update({'dateToReload': datetime.utcnow().date() + timedelta(days = 1)})
+            saveto_binary(obj_structure = request, file_name = file_name, data_root_path_folder_name = folder_name)
+        except:
+            request = {}
 
     request_date_to_reload = request.get('dateToReload')
 
     if request_date_to_reload is not None and request_date_to_reload > datetime.utcnow().date():
         return request
     else:
-        request = requests.get(api).json()
-        request.update({'dateToReload': datetime.utcnow().date() + timedelta(days = 1)})
-        saveto_binary(obj_structure = request, file_name = file_name, data_root_path_folder_name = folder_name)
+        try:
+            request = requests.get(api).json()
+            request.update({'dateToReload': datetime.utcnow().date() + timedelta(days = 1)})
+            saveto_binary(obj_structure = request, file_name = file_name, data_root_path_folder_name = folder_name)
+        except:
+            request = {}
 
     return request
 
