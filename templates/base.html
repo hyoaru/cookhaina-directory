@@ -12,12 +12,13 @@
 <body class="bg-light">
     <div class="container">
         {% include '/layout/default/header.html' %}
-        
-        {% block base_content %} {% endblock base_content %}
-    </div>
 
+        {% block base_content %} {% endblock base_content %}
+        {% assets "user_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
+    </div>
+    
     {% include '/layout/default/footer.html' %}
-    {% assets "scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
+    {% assets "style_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
 </body>
 
 </html>

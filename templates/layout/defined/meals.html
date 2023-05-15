@@ -1,23 +1,26 @@
 <div class="row">
+    {% assets "user_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
+    
     {% if not meals %}
-        <div class="text-center mb-5 mt-4">
-            <p class="lead fw-bold text-muted mt-4 fs-3">No results found.</p>
+    <div class="text-center mb-5 mt-4">
+        <p class="lead fw-bold text-muted mt-4 fs-3">No results found.</p>
             <div class="d-flex justify-content-center ms-0 ms-sm-5">
                 <img src="{{ url_for('static', filename = 'assets/images/undraw_void_-3-ggu.svg') }}" alt="" width="300" class="img-fluid">
             </div>
         </div>
 
     {% else %}
+
         {% for meal in meals %}
             <div class="col-12 col-sm-6 col-md-4 col-xl-3">
-                <div class="card mb-4 rounded-4 meal-card placeholder-glow">
+                <div class="card mb-4 rounded-4 meal-card placeholder-glow" id="mealCard-{{meal.get('idMeal')}}" >
                     <div class="position-relative">
                         <div class="position-absolute z-3 card-img-top rounded-4 rounded-bottom-0 meal-thumbnail placeholder" style="height: 214px;"></div>
                         <div class="z-3 card-img-top rounded-4 rounded-bottom-0 meal-thumbnail" style="height: 214px;"></div>
-                        <img src="{{ meal['strMealThumb'] }}" alt="" class="z-2 card-img-top rounded-4 rounded-bottom-0 meal-thumbnail d-none" style="height: 214px; object-fit: cover;">
+                        <img src="{{ meal['strMealThumb'] }}" onload="{{ 'removePlaceholder(' + meal.get('idMeal') + ')' }}" alt="" class="z-2 card-img-top rounded-4 rounded-bottom-0 meal-thumbnail d-none" style="height: 214px; object-fit: cover;">
                     </div>
                     <div class="card-body bg-light rounded-4 rounded-top-0">
-                        <h6 class="card-title placeholder ">{{ meal['strMeal'] }}</h6>
+                        <h6 class="card-title placeholder">{{ meal['strMeal'] }}</h6>
                     </div>
                 </div>
             </div>

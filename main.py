@@ -20,10 +20,13 @@ Environment(app).register({
         'assets/scss/style.scss', filters = ('libsass', 'cssmin'), 
         depends = 'packages/bootstrap-5.3.0-alpha3/scss/*.scss',
         output = 'assets/css/main.css', ), 
-    'scripts': Bundle(
+    'style_scripts': Bundle(
         'packages/bootstrap-5.3.0-alpha3/dist/js/bootstrap.bundle.js',
-        'assets/js/script.js',
-        filters = ('jsmin'), output = 'assets/js/main.js', ), })
+        filters = ('jsmin'), output = 'assets/js/style_scripts.js', ), 
+    'user_scripts': Bundle(
+        'assets/js/user_defined.js',
+        output = 'assets/js/user_scripts.js' 
+    ), })
 
 @app.context_processor
 def inject_global_elements():
