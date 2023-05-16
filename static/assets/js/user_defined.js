@@ -57,3 +57,8 @@ document.querySelectorAll('.category-pill').forEach((pill) => {
         pill.classList.toggle('text-bg-primary')
     })
 })
+
+function openLink(link) {
+    window.location.href = link;
+    console.log(link)
+}
