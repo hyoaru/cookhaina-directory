@@ -15,15 +15,7 @@ document.querySelectorAll('.meal-card').forEach((card) => {
     const mealCardImage = mealCardImageContainer.lastElementChild;
     const mealCardTitle = card.lastElementChild.firstElementChild;
 
-    // mealCardImage.addEventListener('load', () => {
-    //     mealCardImageContainer.children[0].remove();
-    //     mealCardImageContainer.children[0].remove();
-    //     console.log('here')
-    //     mealCardImage.classList.remove('d-none');
-    //     mealCardTitle.classList.remove('placeholder');
-    // })
-
-    card.style.transition = "all 0.5s"
+    card.style.transition = "all 0.3s"
 
     card.addEventListener('mouseover', () => {
         card.classList.toggle('border-primary')
@@ -45,4 +37,19 @@ document.querySelector('#categoryButton').addEventListener('click', () => {
         categoryButton.style.transition = "all 0s"
     }
     categoryButton.classList.toggle('rounded-bottom-0')
+})
+
+document.querySelectorAll('.category-pill').forEach((pill) => {
+
+    pill.style.transition = "all 0.3s"
+
+    pill.addEventListener('mouseover', () => {
+        pill.classList.toggle('text-bg-white')
+        pill.classList.toggle('text-bg-primary')
+    })
+
+    pill.addEventListener('mouseout', () => {
+        pill.classList.toggle('text-bg-white')
+        pill.classList.toggle('text-bg-primary')
+    })
 })

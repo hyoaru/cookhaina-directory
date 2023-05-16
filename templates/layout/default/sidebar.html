@@ -11,7 +11,7 @@
         <div class="d-flex flex-wrap px-3 pb-3">
             {% for category in categories_information %}
                 <a href="{{ url_for('category', category_name = category['strCategory']) }}">
-                    <span class="badge rounded-pill text-bg-white me-1 mb-1 py-1 px-2">{{ category['strCategory']  }}</span>
+                    <span class="badge rounded-pill text-bg-white me-1 mb-1 py-1 px-2 category-pill">{{ category['strCategory']  }}</span>
                 </a>
             {% endfor %}
         </div>
