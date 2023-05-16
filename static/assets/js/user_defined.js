@@ -39,7 +39,7 @@ document.querySelectorAll('.meal-card').forEach((card) => {
 
 document.querySelector('#categoryButton').addEventListener('click', () => {
     const categoryButton = document.querySelector('#categoryButton');
-    if (categoryButton.classList.contains('rounded-bottom-0')) {
+    if (categoryButton.classList.contains('collapsed')) {
         categoryButton.style.transition = "all 3s"
     } else {
         categoryButton.style.transition = "all 0s"
