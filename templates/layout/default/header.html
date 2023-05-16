@@ -6,7 +6,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
                     <li class="nav-item">
                         <a 
                             {% if request.path == url_for('home') %}
@@ -37,7 +37,7 @@
                         <span class="input-group-text bg-light border-primary border">
                             <i class="bi bi-search text-primary"></i>
                         </span>
-                        <input type="text" class="form-control bg-light border border-primary" placeholder="Search name or main ingredient" name="keyword">
+                        <input type="text" class="form-control bg-light border border-primary" size="30" placeholder="Search by name or main ingredient" name="keyword">
                         <button class="btn btn-outline-primary btn-sm" type="submit">Search</button>
                     </div>
                 </form>
