@@ -36,7 +36,8 @@ def inject_global_elements():
 
 @app.route('/')
 def home():
-    meals = get_request_from_search_by_main_ingredient('beef')['meals']
+    meal_of_the_day_category = get_request_random_meal_of_the_day()['meals'][0]['strCategory']
+    meals = get_request_from_search_by_category(meal_of_the_day_category)['meals']
     return render_template('main/home.html', meals = meals)
 
 @app.route('/search')
