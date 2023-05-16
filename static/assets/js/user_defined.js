@@ -18,13 +18,17 @@ document.querySelectorAll('.meal-card').forEach((card) => {
     card.style.transition = "all 0.3s"
 
     card.addEventListener('mouseover', () => {
-        card.classList.toggle('border-primary')
-        card.style.transform = 'scale(1.02)'
+        if (!card.classList.contains('border-primary')){
+            card.classList.add('border-primary')
+            card.style.transform = 'scale(1.02)'
+        }
     })
 
     card.addEventListener('mouseout', () => {
-        card.classList.toggle('border-primary')
-        card.style.transform = 'scale(1)'
+        if (card.classList.contains('border-primary')){
+            card.classList.remove('border-primary')
+            card.style.transform = 'scale(1)'
+        }
     })
 })
 
