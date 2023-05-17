@@ -24,7 +24,10 @@
 
         <div class="col-12 col-xl-5 d-none d-xl-block">
             <div class="d-flex h-100">
-                <img src="{{ url_for('static', filename = 'assets/images/undraw_cooking_p7m1.svg') }}" alt="" class="bg-light img-fluid rounded-circle p-1 my-auto d-block">
+                <div class="bg-secondary rounded-circle position-relative mt-0 mx-auto" style="width: 450px; height: 450px;">
+                    <lottie-player src="{{ url_for('static', filename = 'assets/lottie/girl_cooking.json') }}"  background="transparent"  speed="1" style="position: relative; top: -4em;"  loop autoplay></lottie-player>
+                </div>
+                <!-- <img src="{{ url_for('static', filename = 'assets/images/undraw_cooking_p7m1.svg') }}" alt="" class="bg-light img-fluid rounded-circle p-1 my-auto d-block"> -->
             </div>
         </div>
     </div>

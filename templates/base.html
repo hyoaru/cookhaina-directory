@@ -5,20 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Find recipe</title>
-
     {% assets "styles" %} <link rel="stylesheet" href="{{ ASSET_URL }}"> {% endassets %}
 </head>
 
 <body class="bg-light">
     <div class="container">
         {% include '/layout/default/header.html' %}
-
+        
         {% block base_content %} {% endblock base_content %}
         {% assets "user_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
     </div>
     
     {% include '/layout/default/footer.html' %}
     {% assets "style_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </body>
 
 </html>
