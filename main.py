@@ -68,29 +68,22 @@ def category(category_name):
 
 @app.route("/meal/<id>")
 def meal_details(id):
-    meal = get_request_from_meal_by_id(id)
+    meal = get_request_from_meal_by_id(id)['meals'][0]
     keys = [key for key in meal.keys()]
 
-    meal_ingredients = []
-    for key in keys:
-        if not key.startswith('strIngredient'):
-            continue
-        ingredient_key = key
-        ingredient = meal[ingredient_key]
-        if ingredient != '':
-            meal_ingredients.append(ingredient)
-
-    meal_ingredients_measure = []
-    for key in keys:
-        if not key.startswith('strMeasure'):
-            continue
-        ingredient_measure_key = key
-        ingredient_measure = meal[ingredient_measure_key]
-        if ingredient_measure != '':
-            meal_ingredients_measure.append(ingredient_measure)
-
+    def get_key_group(key_name_start_with: str) -> list:
+        key_group_list = []
+        for key in keys:
+            if not key.startswith(key_name_start_with):
+                continue
+            item = meal[key]
+            if item != '':
+                key_group_list.append(item)
+        return key_group_list
+        
+    meal_ingredients = get_key_group('strIngredient')
+    meal_ingredients_measure = get_key_group('strMeasure')
     meal_ingredient_by_measure = dict(zip(meal_ingredients, meal_ingredients_measure))
-    print(meal_ingredient_by_measure)
 
     return render_template(
         'main/meal_details.html', meal = meal, meal_ingredient_by_measure= meal_ingredient_by_measure)
