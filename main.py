@@ -7,7 +7,7 @@ from flask_assets import Environment, Bundle
 from utilities.api_requests import (
     get_request_from_search_by_main_ingredient, get_request_categories_information,
     get_request_from_search_by_category, get_request_random_meal_of_the_day, 
-    get_request_from_search_by_name)
+    get_request_from_search_by_name, get_request_from_meal_by_id)
 
 # Load environment variables
 load_dotenv()
@@ -38,6 +38,7 @@ def inject_global_elements():
 def home():
     meal_of_the_day_category = get_request_random_meal_of_the_day()['meals'][0]['strCategory']
     meals = get_request_from_search_by_category(meal_of_the_day_category)['meals']
+    print(meals)
     return render_template('main/home.html', meals = meals)
 
 @app.route('/search')
@@ -64,6 +65,35 @@ def search():
 def category(category_name):
     meals = get_request_from_search_by_category(category_name)['meals']
     return render_template('main/category.html', meals = meals, category_name = category_name)
+
+@app.route("/meal/<id>")
+def meal_details(id):
+    meal = get_request_from_meal_by_id(id)
+    keys = [key for key in meal.keys()]
+
+    meal_ingredients = []
+    for key in keys:
+        if not key.startswith('strIngredient'):
+            continue
+        ingredient_key = key
+        ingredient = meal[ingredient_key]
+        if ingredient != '':
+            meal_ingredients.append(ingredient)
+
+    meal_ingredients_measure = []
+    for key in keys:
+        if not key.startswith('strMeasure'):
+            continue
+        ingredient_measure_key = key
+        ingredient_measure = meal[ingredient_measure_key]
+        if ingredient_measure != '':
+            meal_ingredients_measure.append(ingredient_measure)
+
+    meal_ingredient_by_measure = dict(zip(meal_ingredients, meal_ingredients_measure))
+    print(meal_ingredient_by_measure)
+
+    return render_template(
+        'main/meal_details.html', meal = meal, meal_ingredient_by_measure= meal_ingredient_by_measure)
 
 @app.route('/about')
 def about():

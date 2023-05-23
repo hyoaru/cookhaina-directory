@@ -82,3 +82,8 @@ def get_request_from_search_by_name(keyword: str) -> dict:
         api = 'https://www.themealdb.com/api/json/v1/1/search.php?s=')
 
     return request
+
+def get_request_from_meal_by_id(id):
+    api_link = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}"
+    request = requests.get(api_link).json()['meals'][0]
+    return request
