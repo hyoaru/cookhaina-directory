@@ -36,12 +36,16 @@
     </div>
 
     <div class="col-12">
-        <a class="fw-bold fs-5 text-decoration-none text-dark" id="instructionToggle" data-bs-toggle="collapse" role="button" href="#instructionBody">Instructions <span class="dropdown-toggle"></span> </a>
-        <ol class="show" id="instructionBody">
-            {% for instruction in meal['strInstructions'].split('\r\n') %}
-                <li class="mt-1 bg-transparent">{{ instruction }}</li>
-            {% endfor %}
-        </ol>
+        <a id="instructionToggle1" class="text-decoration-none text-muted d-none" href="#instructionBody" data-bs-toggle="collapse" role="button"><small>Show instruction <span class="dropdown-toggle"></span></small></a>
+        <div class="collapse fade show" id="instructionBody">
+            <a class="fw-bold fs-5 text-decoration-none text-dark" id="instructionToggle2" data-bs-toggle="collapse" role="button" href="#instructionBody">Instructions <i class="bi bi-caret-up-fill"></i> </a>
+            <ol>
+                {% for instruction in meal['strInstructions'].split('\r\n') %}
+                    <li class="mt-1 bg-transparent">{{ instruction }}</li>
+                {% endfor %}
+            </ol>
+            <script>setMealInstructionsEffects()</script>
+        </div>
     </div>
 
 </div>

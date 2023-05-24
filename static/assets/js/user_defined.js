@@ -65,3 +65,27 @@ function initializeCategoryEffects() {
 function openLink(link) {
     window.location.href = link;
 }
+
+function setMealInstructionsEffects() {
+    const instructionBody = document.querySelector('#instructionBody');
+    const instructionToggle1 = document.querySelector('#instructionToggle1');
+    const instructionToggle2 = document.querySelector('#instructionToggle2');
+
+    function toggleVisibilityInstructionToggle1() {
+        if (instructionToggle2.classList.contains('collapsed')) {
+            setTimeout(() => {
+                instructionToggle1.classList.remove('d-none');
+            }, 225)
+        } else {
+            instructionToggle1.classList.add('d-none');
+        }
+    }
+
+    instructionToggle1.addEventListener('click', () => {
+        toggleVisibilityInstructionToggle1();
+    })
+
+    instructionToggle2.addEventListener('click', () => {
+        toggleVisibilityInstructionToggle1();
+    })
+}
