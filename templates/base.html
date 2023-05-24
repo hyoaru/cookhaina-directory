@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Find recipe</title>
     {% assets "styles" %} <link rel="stylesheet" href="{{ ASSET_URL }}"> {% endassets %}
+    {% assets "user_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
 </head>
 
 <body class="bg-light">
@@ -13,7 +14,6 @@
         {% include '/layout/default/header.html' %}
         
         {% block base_content %} {% endblock base_content %}
-        {% assets "user_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
     </div>
     
     {% include '/layout/default/footer.html' %}

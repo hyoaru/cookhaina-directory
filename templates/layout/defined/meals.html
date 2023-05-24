@@ -1,6 +1,4 @@
 <div class="row">
-    {% assets "user_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
-    
     {% if not meals %}
     <div class="text-center mb-5 mt-4">
         <p class="lead fw-bold text-muted mt-4 fs-3">No results found.</p>
@@ -25,6 +23,8 @@
                 </div>
             </div>
         {% endfor %}
+
+        <script>initializeMealCardEffects()</script>
     {% endif %}
 </div>
 

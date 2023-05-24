@@ -1,5 +1,4 @@
 <!-- Categories -->
-{% assets "user_scripts" %} <script src="{{ ASSET_URL }}"></script> {% endassets %}
 
 <div>
     <a class="btn btn-dark rounded-4 w-100 px-4 py-3 collapsed" data-bs-toggle="collapse" href="#categoryOptions" id="categoryButton" role="button">
@@ -12,9 +11,11 @@
         <div class="d-flex flex-wrap px-3 pb-3">
             {% for category in categories_information %}
                 <a href="{{ url_for('category', category_name = category['strCategory']) }}">
-                    <span class="badge rounded-pill text-bg-white me-1 mb-1 py-1 px-2 category-pill">{{ category['strCategory']  }}</span>
+                    <span class="badge rounded-pill text-bg-white me-1 mb-1 py-1 px-2 category-pill" >{{ category['strCategory']  }}</span>
                 </a>
             {% endfor %}
+
+            <script>initializeCategoryEffects()</script>
         </div>
     </div>
 </div>
