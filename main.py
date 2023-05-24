@@ -77,7 +77,7 @@ def meal_details(id):
             if not key.startswith(key_name_start_with):
                 continue
             item = meal[key]
-            if item != '':
+            if item not in ['', None]:
                 key_group_list.append(item)
         return key_group_list
         
