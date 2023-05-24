@@ -1,15 +1,45 @@
 {% extends 'base_main.html' %}
 {% block content %}
 
+<div class="mx-2 px-1">
+    <div class="row rounded-4 bg-secondary p-4">
+        <div class="col-12 col-md-6 col-xl-8">
+            <h1 class="fw-bold">{{ meal['strMeal'].title() }}</h1>
+    
+            {% for tag in meal['strTags'].split(",") %}
+                <span class="badge rounded-pill text-bg-primary me-1 mb-1 py-1 px-2 ">{{ tag }}</span>
+            {% endfor %}
+            <div class="col-12 mt-3 d-none d-md-block">
+                <h5 class="fw-bold">Ingredients</h5>
+                <ul class="ms-0 row">
+                    {% for ingredient, ingredient_measure in meal_ingredient_by_measure.items() %}
+                        <li class="col-6 col-md-12 col-xl-6"> {{ ingredient_measure }} {{ ingredient}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
 
-<div class="row rounded-4 bg-secondary p-4">
-    <div class="col-8">
-        <h1 class="fw-bold">{{ meal['strMeal'].title() }}</h1>
+        <div class="col-12 mt-3 d-block d-md-none">
+            <a class="position-relative mealThumbnailContainer" href="{{ meal['strYoutube'] }}" target="_blank">
+                <div class="z-3 position-absolute w-100 h-100 animate__animated d-none animate__faster mealThumbnailSeeVideoIndicator">
+                    <div class="z-3 position-absolute text-decoration-none text-white text-center w-100 h-100" style="top: 30%">
+                        <i class="bi bi-caret-left-fill" style="font-size: 5rem;"></i>
+                        <span class="fs-6 fw-bold d-block mt-0">See video instruction</span>
+                    </div>
+                    <div class="position-absolute bg-dark opacity-50 w-100 h-100 rounded-4 z-2">
+                    </div>
+                </div>
+                <!-- <div class="ratio ratio-1x1 position-absolute collapse z-2" id="mealYoutubeVideo">
+                    {% set video_id = meal['strYoutube'].split("=")[1] %}
+                    <iframe src="https://www.youtube.com/embed/{{ video_id }}" allowfullscreen></iframe>
+                </div> -->
+                <div id="mealThumbnail" class="position-relative z-1">
+                    <img src="{{ meal['strMealThumb'] }}" onload="setMealThumbnailEffects()" alt="" class="img-fluid rounded-4 ">
+                </div>
+            </a>
+        </div>
 
-        {% for tag in meal['strTags'].split(",") %}
-            <span class="badge rounded-pill text-bg-primary me-1 mb-1 py-1 px-2 ">{{ tag }}</span>
-        {% endfor %}
-        <div class="col-12 mt-3">
+        <div class="col-12 mt-3 d-block d-md-none">
             <h5 class="fw-bold">Ingredients</h5>
             <ul class="ms-0 row">
                 {% for ingredient, ingredient_measure in meal_ingredient_by_measure.items() %}
@@ -17,42 +47,41 @@
                 {% endfor %}
             </ul>
         </div>
-
-    </div>
-
-    <div class="col-4">
-        <a class="position-relative" id="mealThumbnailContainer" href="{{ meal['strYoutube'] }}" target="_blank">
-            <div class="z-3 position-absolute w-100 h-100 animate__animated d-none animate__faster" id="mealThumbnailSeeVideoIndicator">
-                <div class="z-3 position-absolute text-decoration-none text-white text-center w-100 h-100" style="top: 20%">
-                    <i class="bi bi-caret-left-fill" style="font-size: 5rem;"></i>
-                    <span class="fs-6 fw-bold d-block mt-0">See video instruction</span>
+    
+        <div class="col-6 col-xl-4 d-none d-md-block">
+            <a class="position-relative mealThumbnailContainer" href="{{ meal['strYoutube'] }}" target="_blank">
+                <div class="z-3 position-absolute w-100 h-100 animate__animated d-none animate__faster mealThumbnailSeeVideoIndicator">
+                    <div class="z-3 position-absolute text-decoration-none text-white text-center w-100 h-100" style="top: 25%">
+                        <i class="bi bi-caret-left-fill" style="font-size: 5rem;"></i>
+                        <span class="fs-6 fw-bold d-block mt-0">See video instruction</span>
+                    </div>
+                    <div class="position-absolute bg-dark opacity-50 w-100 h-100 rounded-4 z-2">
+                    </div>
                 </div>
-                <div class="position-absolute bg-dark opacity-50 w-100 h-100 rounded-4 z-2">
+                <!-- <div class="ratio ratio-1x1 position-absolute collapse z-2" id="mealYoutubeVideo">
+                    {% set video_id = meal['strYoutube'].split("=")[1] %}
+                    <iframe src="https://www.youtube.com/embed/{{ video_id }}" allowfullscreen></iframe>
+                </div> -->
+                <div id="mealThumbnail" class="position-relative z-1">
+                    <img src="{{ meal['strMealThumb'] }}" onload="setMealThumbnailEffects()" alt="" class="img-fluid rounded-4 ">
                 </div>
-            </div>
-            <!-- <div class="ratio ratio-1x1 position-absolute collapse z-2" id="mealYoutubeVideo">
-                {% set video_id = meal['strYoutube'].split("=")[1] %}
-                <iframe src="https://www.youtube.com/embed/{{ video_id }}" allowfullscreen></iframe>
-            </div> -->
-            <div id="mealThumbnail" class="placeholder-glow position-relative z-1">
-                <img src="{{ meal['strMealThumb'] }}" onload="setMealThumbnailEffects()" alt="" class="img-fluid rounded-4 ">
-            </div>
-        </a>
-    </div>
-
-    <div class="col-12">
-        <a id="instructionToggle1" class="text-decoration-none text-muted d-none" href="#instructionBody" data-bs-toggle="collapse" role="button"><small>Show instruction <span class="dropdown-toggle"></span></small></a>
-        <div class="collapse fade show" id="instructionBody">
-            <a class="fw-bold fs-5 text-decoration-none text-dark" id="instructionToggle2" data-bs-toggle="collapse" role="button" href="#instructionBody">Instructions <i class="bi bi-caret-up-fill"></i> </a>
-            <ol>
-                {% for instruction in meal['strInstructions'].split('\r\n') %}
-                    <li class="mt-1 bg-transparent">{{ instruction }}</li>
-                {% endfor %}
-            </ol>
-            <script>setMealInstructionsEffects()</script>
+            </a>
         </div>
+    
+        <div class="col-12">
+            <a id="instructionToggle1" class="text-decoration-none text-muted d-none" href="#instructionBody" data-bs-toggle="collapse" role="button"><small>Show instruction <span class="dropdown-toggle"></span></small></a>
+            <div class="collapse fade show" id="instructionBody">
+                <a class="fw-bold fs-5 text-decoration-none text-dark" id="instructionToggle2" data-bs-toggle="collapse" role="button" href="#instructionBody">Instructions <i class="bi bi-caret-up-fill"></i> </a>
+                <ol>
+                    {% for instruction in meal['strInstructions'].split('\r\n') %}
+                        <li class="mt-1 bg-transparent">{{ instruction }}</li>
+                    {% endfor %}
+                </ol>
+                <script>setMealInstructionsEffects()</script>
+            </div>
+        </div>
+    
     </div>
-
 </div>
 
 {% endblock content %}

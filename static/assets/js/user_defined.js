@@ -91,18 +91,26 @@ function setMealInstructionsEffects() {
 }
 
 function setMealThumbnailEffects() {
-    const mealThumbnailContainer = document.querySelector('#mealThumbnailContainer');
-    const mealThumbnailSeeVideoIndicator = document.querySelector('#mealThumbnailSeeVideoIndicator');
+    const mealThumbnailContainers = document.querySelectorAll('.mealThumbnailContainer');
+    const mealThumbnailSeeVideoIndicators = document.querySelectorAll('.mealThumbnailSeeVideoIndicator');
 
-    mealThumbnailContainer.addEventListener('mouseover', () => {
-        mealThumbnailSeeVideoIndicator.classList.remove('d-none')
-        mealThumbnailSeeVideoIndicator.classList.add('animate__fadeIn')
-        mealThumbnailSeeVideoIndicator.classList.remove('animate__fadeOut')
+    mealThumbnailContainers.forEach((mealThumbnailContainer) => {
+        mealThumbnailContainer.addEventListener('mouseover', () => {
+            mealThumbnailSeeVideoIndicators.forEach((mealThumbnailSeeVideoIndicator) => {
+                mealThumbnailSeeVideoIndicator.classList.remove('d-none')
+                mealThumbnailSeeVideoIndicator.classList.add('animate__fadeIn')
+                mealThumbnailSeeVideoIndicator.classList.remove('animate__fadeOut')
+            })
+        })
     })
 
-    mealThumbnailContainer.addEventListener('mouseout', () => {
-        mealThumbnailSeeVideoIndicator.classList.remove('animate__fadeIn')
-        mealThumbnailSeeVideoIndicator.classList.add('animate__fadeOut')
+    mealThumbnailContainers.forEach((mealThumbnailContainer) => {
+        mealThumbnailContainer.addEventListener('mouseout', () => {
+            mealThumbnailSeeVideoIndicators.forEach((mealThumbnailSeeVideoIndicator) => {
+                mealThumbnailSeeVideoIndicator.classList.remove('animate__fadeIn')
+                mealThumbnailSeeVideoIndicator.classList.add('animate__fadeOut')
+            })
+        })
     })
 
 }
