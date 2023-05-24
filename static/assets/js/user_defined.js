@@ -89,3 +89,20 @@ function setMealInstructionsEffects() {
         toggleVisibilityInstructionToggle1();
     })
 }
+
+function setMealThumbnailEffects() {
+    const mealThumbnailContainer = document.querySelector('#mealThumbnailContainer');
+    const mealThumbnailSeeVideoIndicator = document.querySelector('#mealThumbnailSeeVideoIndicator');
+
+    mealThumbnailContainer.addEventListener('mouseover', () => {
+        mealThumbnailSeeVideoIndicator.classList.remove('d-none')
+        mealThumbnailSeeVideoIndicator.classList.add('animate__fadeIn')
+        mealThumbnailSeeVideoIndicator.classList.remove('animate__fadeOut')
+    })
+
+    mealThumbnailContainer.addEventListener('mouseout', () => {
+        mealThumbnailSeeVideoIndicator.classList.remove('animate__fadeIn')
+        mealThumbnailSeeVideoIndicator.classList.add('animate__fadeOut')
+    })
+
+}
