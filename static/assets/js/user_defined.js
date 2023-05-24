@@ -10,7 +10,7 @@ function removePlaceholder(mealCardID) {
     mealCardTitle.classList.remove('placeholder');
 }
 
-function initializeMealCardEffects() {
+function setMealCardEffects() {
     document.querySelectorAll('.meal-card').forEach((card) => {
         const mealCardImageContainer = card.firstElementChild;
         const mealCardImage = mealCardImageContainer.lastElementChild;
@@ -35,7 +35,7 @@ function initializeMealCardEffects() {
 }
 
 
-function initializeCategoryEffects() {
+function setCategoryEffects() {
     document.querySelector('#categoryButton').addEventListener('click', () => {
         const categoryButton = document.querySelector('#categoryButton');
         if (categoryButton.classList.contains('collapsed')) {
