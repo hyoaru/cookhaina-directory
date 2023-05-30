@@ -10,7 +10,7 @@
     {% else %}
 
         {% for meal in meals %}
-            <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+            <a class="col-12 col-sm-6 col-md-4 col-xl-3 text-decoration-none" href="{{ url_for('meal_details', id = meal['idMeal']) }}">
                 <div class="card mb-4 rounded-4 meal-card placeholder-glow" id="mealCard-{{meal.get('idMeal')}}" >
                     <div class="position-relative">
                         <div class="position-absolute z-3 card-img-top rounded-4 rounded-bottom-0 meal-thumbnail placeholder" style="height: 214px;"></div>
@@ -21,7 +21,7 @@
                         <h6 class="card-title placeholder">{{ meal['strMeal'] }}</h6>
                     </div>
                 </div>
-            </div>
+            </a>
         {% endfor %}
 
         <script>setMealCardEffects()</script>
