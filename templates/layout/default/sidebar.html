@@ -29,7 +29,7 @@
             <p class="fw-medium text-break mb-0">{{ meal_of_the_day['strMeal'] }}</p>
             <small class="">Category: {{ meal_of_the_day['strCategory'] }}</small>
         </div>
-        <a href="" class="btn btn-sm btn-primary mt-3 d-block">See procedures</a>
+        <a href="{{ url_for('meal_details', id = meal_of_the_day['idMeal'])}}" class="btn btn-sm btn-primary mt-3 d-block">See procedures</a>
         <a href="{{ meal_of_the_day['strYoutube'] }}" class="btn btn-sm btn-light mt-1 d-block">Help me prepare!</a>
     </div>
 
