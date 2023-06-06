@@ -43,8 +43,8 @@ def home():
     print(meals)
     return render_template('main/home.html', meals = meals)
 
-@app.route('/search')
-def search():
+@app.route('/search_results')
+def search_results():
     query_request = request.args.get(key = 'keyword', type = str)
     keyword = '' if query_request is None else query_request
     
@@ -61,7 +61,11 @@ def search():
         if meal_not_present_in_main_list:
             meals.append(meal)
 
-    return render_template('main/search.html', meals = meals, keyword = keyword)
+    return render_template('main/search_results.html', meals = meals, keyword = keyword)
+
+@app.route('/search')
+def search():
+    return render_template('main/search.html')
 
 @app.route('/category/<category_name>')
 def category(category_name):

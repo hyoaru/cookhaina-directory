@@ -1,6 +1,26 @@
 {% extends 'base_main.html' %}
 {% block content %}
-    <h4 class="fw-bold mt-3">Search results from: <span class="text-primary">'{{ keyword }}'</span></h4>
+<div>
+    <h4 class="fw-bold mt-3 mb-3">Looking for something?</h4>
+    <form role="search" action="{{ url_for('search_results') }}">
+        <div class="input-group">
+            <span class="input-group-text bg-secondary">
+                <i class="bi bi-search fw-bold"></i>
+            </span>
+            <input type="text" class="form-control bg-light" size="30" placeholder="Search by name or main ingredient"
+            name="keyword">
+            <button class="btn btn-primary btn-sm" type="submit">Search</button>
+        </div>
+    </form>
     <div style="height: 1.3rem;"></div>
-    {% include 'layout/defined/meals.html' %}
+
+    <div class="d-flex justify-content-center opacity-75 mt-4">
+        <div class="text-center">
+            <h4 class="fw-semibold">Waiting to search</h4>
+            <p class="lead mb-4">Start searching and it'll show up here</p>
+            <img src="{{ url_for('static', filename='assets/images/undraw_location_search_re_ttoj.svg') }}" class="img-fluid w-50" alt="">
+        </div>
+    </div>
+
+</div>
 {% endblock content %}
