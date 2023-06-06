@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for
 from flask_assets import Environment, Bundle
+from flask_login import login_user, current_user, logout_user   
 
 # App imports
 from utilities.api_requests import (
@@ -10,11 +11,14 @@ from utilities.api_requests import (
     get_request_from_search_by_name, get_request_from_meal_by_id)
 
 from forms import LoginForm, SignUpForm
+from models import User
+from instances import db, login_manager
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 Environment(app).register({
@@ -93,15 +97,32 @@ def meal_details(id):
 
     return render_template('main/meal_details.html', meal = meal, meal_ingredient_by_measure = meal_ingredient_by_measure)
 
-@app.route("/login")
+@app.route("/login", methods = ['POST', 'GET'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        print(form.username.data)
+        
+        user = User.query.filter_by(username = form.username.data).first()
+        if user and (user.password == form.password.data):
+            login_user(user = user, remember = form.remember.data)
+            return redirect(url_for('home'))
     return render_template('authentication/login.html', form = form)
+
 
 @app.route("/signup", methods = ['POST', 'GET'])
 def signup():
     form = SignUpForm()
+    if form.validate_on_submit():
+        new_user =  User(
+            username = form.username.data,
+            email = form.email.data,
+            password = form.password.data
+        )
+        db.session.add(new_user)
+        db.session.commit()
     return render_template('authentication/signup.html', form = form)
+
 
 @app.route('/about')
 def about():
@@ -120,4 +141,8 @@ def error_500(error):
     return render_template('errors/500.html'), 500
 
 if __name__ == '__main__':
+    db.init_app(app)
+    login_manager.init_app(app)
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
