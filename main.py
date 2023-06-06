@@ -9,6 +9,8 @@ from utilities.api_requests import (
     get_request_from_search_by_category, get_request_random_meal_of_the_day, 
     get_request_from_search_by_name, get_request_from_meal_by_id)
 
+from forms import LoginForm, SignUpForm
+
 # Load environment variables
 load_dotenv()
 
@@ -85,8 +87,17 @@ def meal_details(id):
     meal_ingredients_measure = get_key_group('strMeasure')
     meal_ingredient_by_measure = dict(zip(meal_ingredients, meal_ingredients_measure))
 
-    return render_template(
-        'main/meal_details.html', meal = meal, meal_ingredient_by_measure= meal_ingredient_by_measure)
+    return render_template('main/meal_details.html', meal = meal, meal_ingredient_by_measure = meal_ingredient_by_measure)
+
+@app.route("/login")
+def login():
+    form = LoginForm()
+    return render_template('authentication/login.html', form = form)
+
+@app.route("/signup", methods = ['POST', 'GET'])
+def signup():
+    form = SignUpForm()
+    return render_template('authentication/signup.html', form = form)
 
 @app.route('/about')
 def about():

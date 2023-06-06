@@ -1,0 +1,43 @@
+{% extends 'base_flat.html' %}
+{% block content %} 
+<div class="row mt-3 mb-5">
+    <div class="col-12 col-lg-6 d-none d-lg-block">
+        <div class="d-flex align-items-center justify-content-center">
+            <lottie-player src="{{ url_for('static', filename = 'assets/lottie/signup.json') }}" class="bg-secondary rounded-circle"
+                background="transparent" speed="1" style="width: 80%; padding: 2em;" loop autoplay></lottie-player>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <h1 class="fw-bold mb-3">Log in </h1>
+            <div class="">
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label fw-bold text-primary") }}
+                    {{ form.username(class="form-control", placeholder="Enter your username") }}
+                </div>
+                
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label fw-bold text-primary") }}
+                    {{ form.password(class="form-control", placeholder="Enter your password") }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check form-check-inline">
+                    {{ form.remember.label(class="form-check-label") }}
+                    {{ form.remember(class="form-check-input") }}
+                </div>
+            </div>
+                
+            <div class="mb-4">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+
+            <hr>
+            <small class="text-muted">Don't have an account yet? <span><a href="">Sign up</a></span></small>
+        </form>
+    </div>
+</div>
+    
+{% endblock content %}
