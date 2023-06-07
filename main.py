@@ -101,12 +101,11 @@ def meal_details(id):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print(form.username.data)
-        
         user = User.query.filter_by(username = form.username.data).first()
         if user and (user.password == form.password.data):
             login_user(user = user, remember = form.remember.data)
             return redirect(url_for('home'))
+        
     return render_template('authentication/login.html', form = form)
 
 
@@ -117,10 +116,12 @@ def signup():
         new_user =  User(
             username = form.username.data,
             email = form.email.data,
-            password = form.password.data
-        )
+            password = form.password.data, )
+        
         db.session.add(new_user)
         db.session.commit()
+        return redirect('login')
+
     return render_template('authentication/signup.html', form = form)
 
 
