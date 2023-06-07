@@ -111,18 +111,27 @@ def login():
 
 @app.route("/signup", methods = ['POST', 'GET'])
 def signup():
-    form = SignUpForm()
-    if form.validate_on_submit():
-        new_user =  User(
-            username = form.username.data,
-            email = form.email.data,
-            password = form.password.data, )
-        
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect('login')
+    if not current_user.is_authenticated:
+        form = SignUpForm()
+        if form.validate_on_submit():
+            new_user =  User(
+                username = form.username.data,
+                email = form.email.data,
+                password = form.password.data, )
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('home'))
 
-    return render_template('authentication/signup.html', form = form)
+        return render_template('authentication/signup.html', form = form)
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/logout')
+def logout():
+    if current_user.is_authenticated:
+        logout_user()
+        return redirect(url_for('home'))
+
 
 
 @app.route('/about')
