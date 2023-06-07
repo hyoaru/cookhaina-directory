@@ -48,7 +48,16 @@
                 <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
                         <li class="nav-item">
-                            <a href="" class="nav-link fw-bold text-primary">{{ current_user.username }}</a>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle fw-bold text-decoration-none text-dark" href="" data-bs-toggle="dropdown">
+                                    {{ current_user.username }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a href="" class="dropdown-item">Favorites</a></li>
+                                    <li><a href="" class="dropdown-item">Account</a></li>
+                                    <li><a href="" class="dropdown-item">Log out</a></li>
+                                </ul>
+                            </div>
                         </li>
                     {% else %}
                         <li class="nav-item">
