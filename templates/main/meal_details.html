@@ -4,13 +4,21 @@
 <div class="mx-2 px-1">
     <div class="row rounded-4 bg-secondary p-4">
         <div class="col-12 col-md-6 col-xl-8">
-            <h1 class="fw-bold">{{ meal['strMeal'].title() }}</h1>
+            <div class="d-flex">
+                <h1 class="fw-bold me-2">{{ meal['strMeal'].title() }}</h1>
+                <a href="" class="text-decoration-none text-warning">
+                    <i id="favoriteIcon" class="bi bi-star fs-2 "></i>
+                </a>
+            </div>
+
+            <script>setFavoriteIconEffects()</script>
     
             {% if meal['strTags'] and ',' in meal['strTags'] %}
                 {% for tag in meal['strTags'].split(",") %}
                     <span class="badge rounded-pill text-bg-primary me-1 mb-1 py-1 px-2 ">{{ tag }}</span>
                 {% endfor %}
             {% endif %}
+
             <div class="col-12 mt-3 d-none d-md-block">
                 <h5 class="fw-bold">Ingredients</h5>
                 <ul class="ms-0 row">

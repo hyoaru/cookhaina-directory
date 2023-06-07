@@ -112,5 +112,22 @@ function setMealThumbnailEffects() {
             })
         })
     })
+}
 
+function setFavoriteIconEffects() {
+    const favoriteIcon = document.querySelector('#favoriteIcon');
+
+    favoriteIcon.addEventListener('mouseover', () => {
+        if (!favoriteIcon.classList.contains('favorite')) {
+            favoriteIcon.classList.remove('bi-star');
+            favoriteIcon.classList.add('bi-star-fill');
+        }
+    })
+
+    favoriteIcon.addEventListener('mouseout', () => {
+        if (!favoriteIcon.classList.contains('favorite')) {
+            favoriteIcon.classList.add('bi-star');
+            favoriteIcon.classList.remove('bi-star-fill');
+        }
+    })
 }
