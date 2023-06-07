@@ -44,8 +44,11 @@ def inject_global_elements():
 def home():
     meal_of_the_day_category = get_request_random_meal_of_the_day()['meals'][0]['strCategory']
     meals = get_request_from_search_by_category(meal_of_the_day_category)['meals']
-    print(meals)
     return render_template('main/home.html', meals = meals)
+
+@app.route('/about')
+def about():
+    return render_template('main/about.html')
 
 @app.route('/search_results')
 def search_results():
@@ -99,14 +102,17 @@ def meal_details(id):
 
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username = form.username.data).first()
-        if user and (user.password == form.password.data):
-            login_user(user = user, remember = form.remember.data)
-            return redirect(url_for('home'))
-        
-    return render_template('authentication/login.html', form = form)
+    if not current_user.is_authenticated:
+        form = LoginForm()
+        if form.validate_on_submit():
+            user = User.query.filter_by(username = form.username.data).first()
+            if user and (user.password == form.password.data):
+                login_user(user = user, remember = form.remember.data)
+                return redirect(url_for('home'))
+            
+        return render_template('authentication/login.html', form = form)
+    else:
+        return redirect(url_for('home'))
 
 
 @app.route("/signup", methods = ['POST', 'GET'])
@@ -114,13 +120,13 @@ def signup():
     if not current_user.is_authenticated:
         form = SignUpForm()
         if form.validate_on_submit():
-            new_user =  User(
+            new_user = User(
                 username = form.username.data,
                 email = form.email.data,
                 password = form.password.data, )
-            db.session.add(new_user)
-            db.session.commit()
-            return redirect(url_for('home'))
+            
+            new_user.save()
+            return redirect(url_for('login'))
 
         return render_template('authentication/signup.html', form = form)
     else:
@@ -134,9 +140,6 @@ def logout():
 
 
 
-@app.route('/about')
-def about():
-    return render_template('main/about.html')
 
 @app.errorhandler(404)
 def error_404(error):
