@@ -6,16 +6,18 @@
         <div class="col-12 col-md-6 col-xl-8">
             <div class="d-flex">
                 <h1 class="fw-bold me-2">{{ meal['strMeal'].title() }}</h1>
-                <a href="{{ url_for('meal_add_to_favorite', id = meal['idMeal']) }}" class="text-decoration-none text-warning">
-                    <i id="favoriteIcon" 
-                    {% if meal['is_favorite'] %}
-                        class="bi bi-star-fill fs-2 favorite"
-                    {% else %}
-                        class="bi bi-star fs-2"
-                    {% endif %}
-                    >
-                    </i>
-                </a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('meal_add_to_favorite', id = meal['idMeal']) }}" class="text-decoration-none text-warning">
+                        <i id="favoriteIcon" 
+                        {% if meal['is_favorite'] %}
+                            class="bi bi-star-fill fs-2 favorite"
+                        {% else %}
+                            class="bi bi-star fs-2"
+                        {% endif %}
+                        >
+                        </i>
+                    </a>
+                {% endif %}
             </div>
 
             <script>setFavoriteIconEffects()</script>
