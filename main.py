@@ -11,7 +11,7 @@ from utilities.api_requests import (
     get_request_from_search_by_name, get_request_from_meal_by_id)
 
 from forms import LoginForm, SignUpForm
-from models import User
+from models import User, Favorite, Comment
 from instances import db, login_manager
 
 # Load environment variables
@@ -39,6 +39,8 @@ def inject_global_elements():
     meal_of_the_day = get_request_random_meal_of_the_day()['meals'][0]
     return dict(
         categories_information = categories_information, meal_of_the_day = meal_of_the_day)
+
+# Main
 
 @app.route('/')
 def home():
@@ -81,7 +83,15 @@ def category(category_name):
 
 @app.route("/meal/<id>")
 def meal_details(id):
+    is_favorite = False
+    if current_user.is_authenticated:
+        user_meal_favorites = Favorite.get_by_meal_id_and_user_id(meal_id = id, user_id = current_user.id)
+        if user_meal_favorites:
+            is_favorite = True
+
     meal = get_request_from_meal_by_id(id)['meals'][0]
+    meal.update({"is_favorite": is_favorite})
+
     keys = [key for key in meal.keys()]
 
     def get_key_group(key_name_start_with: str) -> list:
@@ -99,6 +109,19 @@ def meal_details(id):
     meal_ingredient_by_measure = dict(zip(meal_ingredients, meal_ingredients_measure))
 
     return render_template('main/meal_details.html', meal = meal, meal_ingredient_by_measure = meal_ingredient_by_measure)
+
+@app.route("/meal/<id>/favorite")
+def meal_add_to_favorite(id):
+    favorite = Favorite.get_by_meal_id_and_user_id(meal_id = id, user_id = current_user.id)
+    if not favorite:
+        Favorite(meal_id = id, user = current_user, ).save()
+    else:
+        favorite.delete()
+
+    return redirect(url_for('meal_details', id = id))
+
+
+# Authentication
 
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
@@ -139,7 +162,7 @@ def logout():
         return redirect(url_for('home'))
 
 
-
+# Error pages
 
 @app.errorhandler(404)
 def error_404(error):
@@ -158,4 +181,5 @@ if __name__ == '__main__':
     login_manager.init_app(app)
     with app.app_context():
         db.create_all()
+
     app.run(debug=True)

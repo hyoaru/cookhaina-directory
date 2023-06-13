@@ -85,6 +85,11 @@ class Favorite(db.Model):
         return favorite_list_by_meal_id
     
     @classmethod
+    def get_by_meal_id_and_user_id(cls, meal_id, user_id):
+        favorite_by_meal_id_and_user_id = cls.query.filter_by(user_id = user_id, meal_id = meal_id).first()
+        return favorite_by_meal_id_and_user_id
+    
+    @classmethod
     def get_by_user_id(cls, user_id):
         favorite_list_by_user_id = cls.query.filter_by(user_id = user_id).all()
         return favorite_list_by_user_id
