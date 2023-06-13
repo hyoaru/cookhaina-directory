@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for, abort
 from flask_assets import Environment, Bundle
 from flask_login import login_user, current_user, logout_user   
 
@@ -119,6 +119,21 @@ def meal_add_to_favorite(id):
         favorite.delete()
 
     return redirect(url_for('meal_details', id = id))
+
+@app.route("/user/<username>/favorites")
+def user_favorites(username):
+    user = User.get_by_username(username = username)
+    favorites = []
+    meals = []
+    if user:
+        favorites = Favorite.get_by_user_id(user_id = user.id)
+        for favorite in favorites:
+            meal = get_request_from_meal_by_id(f"{favorite.meal_id}")['meals'][0]
+            meals.append(meal)
+    else:
+        abort(404)
+
+    return render_template('main/user_favorites.html', meals = meals, user = user)
 
 
 # Authentication

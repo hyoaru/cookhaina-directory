@@ -42,6 +42,11 @@ class User(db.Model, UserMixin):
     def get_by_id(cls, id):
         user = cls.query.filter_by(id = id).first()
         return user
+    
+    @classmethod
+    def get_by_username(cls, username):
+        user = cls.query.filter_by(username = username).first()
+        return user
 
     @classmethod
     def get_all_not_archived(cls):
@@ -93,6 +98,8 @@ class Favorite(db.Model):
     def get_by_user_id(cls, user_id):
         favorite_list_by_user_id = cls.query.filter_by(user_id = user_id).all()
         return favorite_list_by_user_id
+    
+    
     
 
 class Comment(db.Model):
