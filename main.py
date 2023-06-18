@@ -10,7 +10,7 @@ from utilities.api_requests import (
     get_request_from_search_by_category, get_request_random_meal_of_the_day, 
     get_request_from_search_by_name, get_request_from_meal_by_id)
 
-from forms import LoginForm, SignUpForm, CommentForm
+from forms import LoginForm, SignUpForm, CommentForm, AccountForm, UpdatePasswordForm
 from models import User, Favorite, Comment
 from instances import db, login_manager, bcrypt
 
@@ -200,6 +200,36 @@ def logout():
     if current_user.is_authenticated:
         logout_user()
         return redirect(url_for('home'))
+
+
+# Account
+
+@app.route('/account', methods = ['GET', 'POST'])
+@login_required
+def account():
+    form = AccountForm()
+    if form.is_submitted():
+        user = User.get_by_id(id = current_user.id)
+        user.email = form.email.data if form.email.data and form.email.validate(form) else user.email
+        user.username = form.username.data if form.username.data else user.username
+            
+        db.session.commit()
+        return redirect(request.referrer)
+
+    return render_template('authentication/account.html', form = form)
+
+@app.route('/account/password', methods = ['GET', 'POST'])
+@login_required
+def account_password():
+    form = UpdatePasswordForm()
+    if form.validate_on_submit():
+        current_user.password = (
+            bcrypt
+            .generate_password_hash(form.new_password.data)
+            .decode('utf-8'))
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('authentication/account_password.html', form = form)
 
 
 # Error pages

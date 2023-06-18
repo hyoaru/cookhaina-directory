@@ -1,0 +1,31 @@
+{% extends 'base_main.html' %}
+{% block content %}
+    <h4 class="fw-bold mt-3">Account settings</h4>
+    <div style="height: 1rem;"></div>
+    <!-- <hr> -->
+
+    <div class="ms-3">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                <h3 class="fw-bold text-primary m-0">{{ current_user.username }}</h3>
+                <small class="text-body-secondary">Date created: {{ current_user.date_utc.strftime("%B %-d, %Y") }}</small>
+            </div>
+
+            <div class="mb-2">
+                {{ form.email.label(class="form-label text-body-secondary") }}
+                {{ form.email(class="form-control ", placeholder=current_user.email) }}
+            </div>
+            <div class="mb-2">
+                {{ form.username.label(class="form-label text-body-secondary") }}
+                {{ form.username(class="form-control ", placeholder=current_user.username) }}
+            </div>
+            
+            {{ form.submit(class="btn btn-primary mt-3") }}
+        </form>
+
+        <hr>
+        <small>Planning to change password? <a href="{{ url_for('account_password') }}" class="text-primary">Change password</a></small>
+    </div>
+
+{% endblock content %}

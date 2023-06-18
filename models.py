@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     email =  db.Column(db.String(50), unique = True, nullable = False)
     password = db.Column(db.String(200), nullable = False)
     is_archived = db.Column(db.Boolean, nullable = False, default = False)
+    date_utc = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     favorites = db.relationship('Favorite', backref = 'user', lazy = True)
     comments = db.relationship('Comment', backref = 'user', lazy = True)
 
