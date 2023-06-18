@@ -38,7 +38,8 @@ def inject_global_elements():
     categories_information = get_request_categories_information()['categories']
     meal_of_the_day = get_request_random_meal_of_the_day()['meals'][0]
     return dict(
-        categories_information = categories_information, meal_of_the_day = meal_of_the_day)
+        categories_information = categories_information, meal_of_the_day = meal_of_the_day,
+        current_user = current_user)
 
 # Main
 
@@ -249,6 +250,7 @@ def error_500(error):
 if __name__ == '__main__':
     db.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = 'login'
     bcrypt.init_app(app)
     with app.app_context():
         db.create_all()
