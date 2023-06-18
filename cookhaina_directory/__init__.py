@@ -216,8 +216,11 @@ def create_app() -> Flask:
         form = AccountForm()
         if form.is_submitted():
             user = User.get_by_id(id = current_user.id)
-            user.email = form.email.data if form.email.data and form.email.validate(form) else user.email
-            user.username = form.username.data if form.username.data else user.username
+
+            if form.email.data and form.email.validate(form):
+                user.email = form.email.data
+            if form.username.data and User.get_by_username(form.username.data) is None:
+                user.username = form.username.data
                 
             db.session.commit()
             return redirect(request.referrer)
@@ -251,7 +254,6 @@ def create_app() -> Flask:
     @app.errorhandler(500)
     def error_500(error):
         return render_template('errors/500.html'), 500
-
 
     with app.app_context():
         db.create_all()
