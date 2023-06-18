@@ -121,6 +121,12 @@ def meal_details(id):
         comment_list = comment_list)
 
 
+@app.route("/meal/<id>/comment/<comment_id>/delete")
+def meal_comment_delete(id, comment_id):
+    Comment.get_by_id(id = comment_id).archive()
+    return redirect(url_for('meal_details', id = id))
+
+
 @app.route("/meal/<id>/favorite")
 def meal_add_to_favorite(id):
     favorite = Favorite.get_by_meal_id_and_user_id(meal_id = id, user_id = current_user.id)

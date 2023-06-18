@@ -126,7 +126,15 @@
                 <div class="row g-3">
                     {% for comment in comment_list %}
                         <div class="col-12">
-                            <p class="fw-bold mb-1 text-primary">{{ comment.user.username }}</p>
+                            <div class="d-flex align-items-center">
+                                <p class="fw-bold mb-1 text-primary me-auto">{{ comment.user.username }}</p>
+                                <div class="dropstart">
+                                    <a href="#" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown"></a>
+                                    <div class="dropdown-menu">
+                                        <a href="{{ url_for('meal_comment_delete', id = meal['idMeal'], comment_id = comment.id) }}" class="dropdown-item">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
                             <p class="mb-1">{{ comment.comment }}</p>
                             <small class="text-primary">{{ comment.date_utc.strftime("%B %-d, %Y, %A") }}</small>
                         </div>
