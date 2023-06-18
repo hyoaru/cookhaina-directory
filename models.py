@@ -135,7 +135,7 @@ class Comment(db.Model):
 
     @classmethod
     def get_by_meal_id(cls, meal_id):
-        comment_list_by_meal_id = cls.query.filter_by(meal_id = meal_id).all()
+        comment_list_by_meal_id = cls.query.filter_by(meal_id = meal_id, is_archived = False).all()
         return comment_list_by_meal_id
     
     @classmethod

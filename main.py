@@ -10,7 +10,7 @@ from utilities.api_requests import (
     get_request_from_search_by_category, get_request_random_meal_of_the_day, 
     get_request_from_search_by_name, get_request_from_meal_by_id)
 
-from forms import LoginForm, SignUpForm
+from forms import LoginForm, SignUpForm, CommentForm
 from models import User, Favorite, Comment
 from instances import db, login_manager
 
@@ -81,7 +81,7 @@ def category(category_name):
     meals = get_request_from_search_by_category(category_name)['meals']
     return render_template('main/category.html', meals = meals, category_name = category_name)
 
-@app.route("/meal/<id>")
+@app.route("/meal/<id>", methods = ['GET', 'POST'])
 def meal_details(id):
     is_favorite = False
     if current_user.is_authenticated:
@@ -108,7 +108,18 @@ def meal_details(id):
     meal_ingredients_measure = get_key_group('strMeasure')
     meal_ingredient_by_measure = dict(zip(meal_ingredients, meal_ingredients_measure))
 
-    return render_template('main/meal_details.html', meal = meal, meal_ingredient_by_measure = meal_ingredient_by_measure)
+    comment_list = Comment.get_by_meal_id(meal_id = id)
+
+    form = CommentForm()
+    if form.validate_on_submit():
+        Comment(comment = form.comment.data, meal_id = id, user = current_user, ).save()
+        return redirect(url_for('meal_details', id = id))
+
+    return render_template(
+        'main/meal_details.html', form = form, meal = meal,
+        meal_ingredient_by_measure = meal_ingredient_by_measure,
+        comment_list = comment_list)
+
 
 @app.route("/meal/<id>/favorite")
 def meal_add_to_favorite(id):

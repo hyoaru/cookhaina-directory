@@ -31,13 +31,15 @@
                 {% endfor %}
             {% endif %}
 
-            <div class="col-12 mt-3 d-none d-md-block">
-                <h5 class="fw-bold">Ingredients</h5>
-                <ul class="ms-0 row">
-                    {% for ingredient, ingredient_measure in meal_ingredient_by_measure.items() %}
+            <div class="row">
+                <div class="col-12 mt-3 d-none d-md-block">
+                    <h5 class="fw-bold">Ingredients</h5>
+                    <ul class="ms-0 row">
+                        {% for ingredient, ingredient_measure in meal_ingredient_by_measure.items() %}
                         <li class="col-6 col-md-12 col-xl-6"> {{ ingredient_measure }} {{ ingredient}}</li>
-                    {% endfor %}
-                </ul>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -104,7 +106,36 @@
                 <script>setMealInstructionsEffects()</script>
             </div>
         </div>
-    
+        
+    </div>
+
+    {% if current_user.is_authenticated %}
+        <form method="POST" class="row mt-3">
+            {{ form.hidden_tag() }}
+            <div class="rounded-4 border d-flex align-items-center">
+                {{ form.comment(class="form-control py-3 border-0 rounded-4 focus-ring", style="--bs-focus-ring-color: rgba(var(--bs-success-rgb), 0)", placeholder="Write your comment here", autocomplete="off") }}
+                <button type="submit" class="mx-3 bg-transparent border-0"><i class="bi bi-send-fill text-primary fs-5"></i></button>
+            </div>
+        </form>
+    {% endif %}
+
+    <div class="row mt-3">
+        {% if comment_list %}
+            <h4 class="fw-bold mt-4 mb-3 text-body-secondary">Comments</h4>
+            <div class="col-12 mx-3">
+                <div class="row g-3">
+                    {% for comment in comment_list %}
+                        <div class="col-12">
+                            <p class="fw-bold mb-1 text-primary">{{ comment.user.username }}</p>
+                            <p class="mb-1">{{ comment.comment }}</p>
+                            <small class="text-primary">{{ comment.date_utc.strftime("%B %-d, %Y, %A") }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        
+
     </div>
 </div>
 

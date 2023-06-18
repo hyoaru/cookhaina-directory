@@ -30,3 +30,10 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember me')
 
     submit = SubmitField('Log in')
+
+class CommentForm(FlaskForm):
+    comment = StringField(
+        'Comment',
+        validators = [DataRequired(), Length(max = 1500, message = 'Comment must be under 1500 characters')], )
+    
+    submit = SubmitField('Submit')
