@@ -2,7 +2,7 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, ValidationError, EqualTo
-from instances import bcrypt
+from cookhaina_directory.instances import bcrypt
 
 class SignUpForm(FlaskForm):
     username = StringField(

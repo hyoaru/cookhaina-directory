@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import requests
 
 # App imports
-from utilities.essentials import load_binary, saveto_binary
+from cookhaina_directory.utilities.essentials import load_binary, saveto_binary
 
 def get_request_from_search(keyword: str, api: str, folder_name: str) -> dict:
     keyword = keyword.replace(' ', '_')
