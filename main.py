@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, redirect, render_template, request, url_for, abort
 from flask_assets import Environment, Bundle
-from flask_login import login_user, current_user, logout_user   
+from flask_login import login_user, current_user, logout_user, login_required
 
 # App imports
 from utilities.api_requests import (
@@ -122,12 +122,17 @@ def meal_details(id):
 
 
 @app.route("/meal/<id>/comment/<comment_id>/delete")
+@login_required
 def meal_comment_delete(id, comment_id):
-    Comment.get_by_id(id = comment_id).archive()
-    return redirect(url_for('meal_details', id = id))
+    comment = Comment.get_by_id(id = comment_id)
+    if current_user != comment.user:
+        abort(403)
+    else:
+        return redirect(url_for('meal_details', id = id))
 
 
 @app.route("/meal/<id>/favorite")
+@login_required
 def meal_add_to_favorite(id):
     favorite = Favorite.get_by_meal_id_and_user_id(meal_id = id, user_id = current_user.id)
     if not favorite:
