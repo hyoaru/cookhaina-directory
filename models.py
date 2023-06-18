@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(20), unique = True, nullable = False)
     email =  db.Column(db.String(50), unique = True, nullable = False)
-    password = db.Column(db.String(50), nullable = False)
+    password = db.Column(db.String(200), nullable = False)
     is_archived = db.Column(db.Boolean, nullable = False, default = False)
     favorites = db.relationship('Favorite', backref = 'user', lazy = True)
     comments = db.relationship('Comment', backref = 'user', lazy = True)

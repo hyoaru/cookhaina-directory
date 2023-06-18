@@ -12,7 +12,7 @@ from utilities.api_requests import (
 
 from forms import LoginForm, SignUpForm, CommentForm
 from models import User, Favorite, Comment
-from instances import db, login_manager
+from instances import db, login_manager, bcrypt
 
 # Load environment variables
 load_dotenv()
@@ -161,7 +161,7 @@ def login():
         form = LoginForm()
         if form.validate_on_submit():
             user = User.query.filter_by(username = form.username.data).first()
-            if user and (user.password == form.password.data):
+            if user and bcrypt.check_password_hash(pw_hash = user.password, password = form.password.data):
                 login_user(user = user, remember = form.remember.data)
                 return redirect(url_for('home'))
             
@@ -178,7 +178,10 @@ def signup():
             new_user = User(
                 username = form.username.data,
                 email = form.email.data,
-                password = form.password.data, )
+                password = (
+                    bcrypt
+                    .generate_password_hash(form.password.data)
+                    .decode('utf-8')), )
             
             new_user.save()
             return redirect(url_for('login'))
@@ -211,6 +214,7 @@ def error_500(error):
 if __name__ == '__main__':
     db.init_app(app)
     login_manager.init_app(app)
+    bcrypt.init_app(app)
     with app.app_context():
         db.create_all()
 
