@@ -18,7 +18,7 @@ from instances import db, login_manager, bcrypt
 load_dotenv()
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 Environment(app).register({
