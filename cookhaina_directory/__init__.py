@@ -134,6 +134,7 @@ def create_app() -> Flask:
         if current_user != comment.user:
             abort(403)
         else:
+            comment.archive()
             return redirect(url_for('meal_details', id = id))
 
 
